@@ -8,7 +8,7 @@
 # url <- "https://www.citibikenyc.com/system-data"
 s3_url <- "https://s3.amazonaws.com/tripdata/"
 s3_got <- GET(s3_url)
-s3_content <- content(s3_got, type = "text/xml")
+s3_content <- content(s3_got, type = "text/xml", encoding = "UTF-8")
 
 xml_fields <- xmlToDataFrame(s3_content)
 links_to_process <- as.list(paste0(s3_url, (xml_fields$Key)[grep("\\.zip", xml_fields$Key)]))
