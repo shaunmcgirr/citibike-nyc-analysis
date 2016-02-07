@@ -17,6 +17,7 @@ library(httr)       #install.packages('httr')
 library(downloader) #install.packages('downloader')
 library(readr)      #install.packages('readr')
 library(lubridate)  #install.packages('lubridate')
+library(zoo)        #install.packages('zoo')
 library(ggplot2)    #install.packages('ggplot2')
 library(dplyr)      #install.packages('dplyr')
 
@@ -29,6 +30,17 @@ options(digits = 15) # So display of lat/lon isn't truncated
 # Download citibike-nyc system data (zipped CSVs); only need to run this once
 source("code_grooming/download_citibike_data.R")
 
+######################
+# 2. Make data ready #
+######################
+
 # Load the unzipped CSVs in to R, run some data quality checks and make format useful
 source("code_grooming/assemble_citibike_data.R")
+
+#######################
+# 3. Explore visually #
+#######################
+
+
+
 
