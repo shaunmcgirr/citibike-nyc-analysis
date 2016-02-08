@@ -56,11 +56,18 @@ plot(density(trips_by_station_end$total_trips))
 
 ## 4. What does a time series for a station look like?
 data_citibike_analysis$year_month <- as.yearmon(data_citibike_analysis$starttime)
+data_citibike_analysis$start_date <- as.Date(data_citibike_analysis$starttime)
+data_citibike_analysis$stop_date <- as.Date(data_citibike_analysis$stoptime)
+data_citibike_analysis$multi_day_trip <- ifelse(data_citibike_analysis$start_date !=
+                                                data_citibike_analysis$stop_date, 1, 0)
+summary(data_citibike_analysis$multi_day_trip) # Shows 1.3% of trips cross midnight
 
 trips_by_station_start_monthly <- data_citibike_analysis %>%
                                     group_by(`start station id`, year_month) %>%
                                     summarise(total_trips = sum(count))
 
+# 156 of 488 stations have six or fewer months of data, a reasonable change-set
 trips_by_station_month_coverage <- trips_by_station_start_monthly %>%
                                     group_by(`start station id`) %>%
                                     tally() %>% ungroup() %>% arrange(n)
+
